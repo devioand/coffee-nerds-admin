@@ -40,7 +40,7 @@ const QRCodeDialog: React.FC<QRCodeDialogProps> = ({
   });
 
   useEffect(() => {
-    setMenuURL(generateQRCodeURL(defultValue.qrCode));
+    setMenuURL(generateQRCodeURL(qrCode));
   }, [qrCode]);
 
   const handleGenerateQRCode = () => {

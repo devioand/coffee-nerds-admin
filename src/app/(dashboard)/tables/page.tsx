@@ -77,19 +77,53 @@ const Page = () => {
     );
   if (!tables)
     return (
-      <AlertDestructive
-        className="w-max"
-        title={"Invalid tables"}
-        description="Please attempt to refresh the page. If the issue continues, contact the IT team."
-      />
+      <div className="space-y-4">
+        <div className="flex justify-end">
+          <Button
+            disabled={createTableMutation.isPending}
+            onClick={() => setIsDialogOpen(true)}
+          >
+            {createTableMutation.isPending ? "Creating..." : "Create New Table"}
+          </Button>
+        </div>
+        <AlertDestructive
+          className="w-max"
+          title={"Invalid tables"}
+          description="Please attempt to refresh the page. If the issue continues, contact the IT team."
+        />
+        <AddTableDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          onConfirm={handleConfirmCreateTable}
+          newTableData={newTableData}
+          setNewTableData={setNewTableData}
+        />
+      </div>
     );
   if (!!tables && tables.length === 0)
     return (
-      <AlertWarning
-        className="w-max"
-        title="No tables have been created yet."
-        description="Click the button below to add a new table."
-      />
+      <div className="space-y-4">
+        <div className="flex justify-end">
+          <Button
+            disabled={createTableMutation.isPending}
+            onClick={() => setIsDialogOpen(true)}
+          >
+            {createTableMutation.isPending ? "Creating..." : "Create New Table"}
+          </Button>
+        </div>
+        <AlertWarning
+          className="w-max"
+          title="No tables have been created yet."
+          description="Click the button below to add a new table."
+        />
+        <AddTableDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          onConfirm={handleConfirmCreateTable}
+          newTableData={newTableData}
+          setNewTableData={setNewTableData}
+        />
+      </div>
     );
 
   return (
